@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+按钮背景设计思想：
+
+1. 状态反馈：
+   - normal：正常状态
+   - pressed：按下状态
+   - disabled：禁用状态
+
+2. 视觉设计：
+   - 圆角：现代化风格
+   - 渐变：增加视觉层次
+   - 状态变化：提供用户反馈
+
+3. 可访问性：
+   - 足够的对比度
+   - 明确的状态区分
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 按下状态 -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <gradient
+                android:startColor="#1976D2"
+                android:endColor="#1565C0"
+                android:angle="90" />
+        </shape>
+    </item>
+
+    <!-- 禁用状态 -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <solid android:color="#CCCCCC" />
+        </shape>
+    </item>
+
+    <!-- 正常状态 -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <gradient
+                android:startColor="#2196F3"
+                android:endColor="#1976D2"
+                android:angle="90" />
+        </shape>
+    </item>
+
+</selector>
