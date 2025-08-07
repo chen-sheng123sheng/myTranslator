@@ -6,6 +6,7 @@ import com.example.mytranslator.domain.model.TranslationInput
 import com.example.mytranslator.domain.model.TranslationResult
 import com.example.mytranslator.domain.repository.LanguageRepository
 import com.example.mytranslator.domain.repository.TranslationRepository
+import com.example.mytranslator.domain.service.TranslationHistoryIntegrationService
 
 /**
  * 翻译用例
@@ -38,7 +39,8 @@ import com.example.mytranslator.domain.repository.TranslationRepository
  */
 class TranslateUseCase(
     private val translationRepository: TranslationRepository,
-    private val languageRepository: LanguageRepository
+    private val languageRepository: LanguageRepository,
+    private val historyIntegrationService: TranslationHistoryIntegrationService? = null
 ) {
 
 
@@ -310,11 +312,30 @@ class TranslateUseCase(
     private suspend fun performPostProcessing(result: TranslationResult, params: Params) {
         // 保存到历史记录
         if (params.saveToHistory) {
-            translationRepository.saveTranslationToHistory(result)
-                .onFailure { 
-                    // 历史保存失败不影响翻译结果，只记录日志
-                    println("保存翻译历史失败: ${it.message}")
-                }
+            // 优先使用新的历史记录集成服务
+            if (historyIntegrationService != null) {
+                historyIntegrationService.saveTranslationToHistory(result)
+                    .onFailure {
+                        Log.w(TAG, "新历史记录系统保存失败，回退到旧系统: ${it.message}")
+                        // 回退到旧的历史记录系统
+                        translationRepository.saveTranslationToHistory(result)
+                            .onFailure { fallbackError ->
+                                Log.e(TAG, "历史记录保存完全失败: ${fallbackError.message}")
+                            }
+                    }
+                    .onSuccess {
+                        Log.d(TAG, "✅ 翻译历史记录保存成功（新系统）")
+                    }
+            } else {
+                // 使用旧的历史记录系统
+                translationRepository.saveTranslationToHistory(result)
+                    .onFailure {
+                        Log.e(TAG, "历史记录保存失败: ${it.message}")
+                    }
+                    .onSuccess {
+                        Log.d(TAG, "✅ 翻译历史记录保存成功（旧系统）")
+                    }
+            }
         }
 
         // 更新语言使用统计

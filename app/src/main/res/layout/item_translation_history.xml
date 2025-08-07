@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/accent_color"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- 选择框 -->
+        <CheckBox
+            android:id="@+id/checkbox_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <!-- 原文 -->
+        <TextView
+            android:id="@+id/text_original"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_color_primary"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@id/button_favorite"
+            app:layout_constraintStart_toEndOf="@id/checkbox_select"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Hello, how are you today?" />
+
+        <!-- 译文 -->
+        <TextView
+            android:id="@+id/text_translated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_color_secondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/button_favorite"
+            app:layout_constraintStart_toEndOf="@id/checkbox_select"
+            app:layout_constraintTop_toBottomOf="@id/text_original"
+            tools:text="你好，你今天怎么样？" />
+
+        <!-- 收藏按钮 -->
+        <ImageButton
+            android:id="@+id/button_favorite"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_favorite"
+            android:src="@drawable/ic_favorite_outline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/icon_color_secondary" />
+
+        <!-- 删除按钮 -->
+        <ImageButton
+            android:id="@+id/button_delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_delete"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_favorite"
+            app:tint="@color/icon_color_secondary" />
+
+        <!-- 语言对信息 -->
+        <TextView
+            android:id="@+id/text_language_pair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_language_tag"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:textColor="@color/text_color_tertiary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/checkbox_select"
+            app:layout_constraintTop_toBottomOf="@id/text_translated"
+            tools:text="英语 → 中文" />
+
+        <!-- 翻译服务商 -->
+        <TextView
+            android:id="@+id/text_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_provider_tag"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:textColor="@color/accent_color"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/text_language_pair"
+            app:layout_constraintTop_toTopOf="@id/text_language_pair"
+            tools:text="BAIDU" />
+
+        <!-- 时间戳 -->
+        <TextView
+            android:id="@+id/text_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/text_color_tertiary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/checkbox_select"
+            app:layout_constraintTop_toBottomOf="@id/text_language_pair"
+            tools:text="2小时前" />
+
+        <!-- 使用次数 -->
+        <TextView
+            android:id="@+id/text_usage_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/text_color_tertiary"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/text_timestamp"
+            app:layout_constraintTop_toTopOf="@id/text_timestamp"
+            tools:text="使用 3 次"
+            tools:visibility="visible" />
+
+        <!-- 质量评分 -->
+        <RatingBar
+            android:id="@+id/rating_quality"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="4.5"
+            android:stepSize="0.5"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/text_timestamp"
+            app:layout_constraintEnd_toStartOf="@id/button_delete"
+            app:layout_constraintTop_toTopOf="@id/text_timestamp"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

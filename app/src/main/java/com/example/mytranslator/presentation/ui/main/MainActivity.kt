@@ -2,6 +2,7 @@ package com.example.mytranslator.presentation.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.example.mytranslator.R
 import com.example.mytranslator.common.base.BaseActivity
 import com.example.mytranslator.databinding.ActivityMainBinding
 import com.example.mytranslator.presentation.ui.translation.text.TextTranslationFragment
+import com.example.mytranslator.presentation.ui.history.TranslationHistoryFragment
 
 /**
  * 主界面Activity
@@ -30,11 +32,16 @@ import com.example.mytranslator.presentation.ui.translation.text.TextTranslation
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
     // 当前显示的Fragment类型
     private enum class FragmentType {
         TEXT_TRANSLATION,
         VOICE_TRANSLATION,
-        CAMERA_TRANSLATION
+        CAMERA_TRANSLATION,
+        TRANSLATION_HISTORY
     }
 
     private var currentFragmentType = FragmentType.TEXT_TRANSLATION
@@ -53,6 +60,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
      * 在这里进行视图相关的初始化工作
      */
     override fun initView() {
+        // 设置Toolbar作为ActionBar
+        setSupportActionBar(binding.toolbarMain)
+
         // 启用边到边显示
         enableEdgeToEdge()
 
@@ -80,6 +90,37 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
      */
     override fun initListener() {
         setupBottomNavigation()
+    }
+
+    /**
+     * 创建选项菜单
+     */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        Log.d(TAG, "创建选项菜单")
+        menuInflater.inflate(R.menu.menu_main, menu)
+        Log.d(TAG, "菜单项数量: ${menu?.size()}")
+        return true
+    }
+
+    /**
+     * 处理菜单项点击
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d(TAG, "菜单项点击: ${item.itemId}")
+        return when (item.itemId) {
+            R.id.action_history -> {
+                Log.d(TAG, "点击历史记录菜单")
+                showTranslationHistoryFragment()
+                true
+            }
+            R.id.action_settings -> {
+                Log.d(TAG, "点击设置菜单")
+                // TODO: 实现设置页面
+                showComingSoonMessage("设置功能即将上线")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     /**
@@ -140,11 +181,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     /**
+     * 显示翻译历史记录Fragment
+     */
+    private fun showTranslationHistoryFragment() {
+        val fragment = TranslationHistoryFragment.newInstance()
+        replaceFragment(fragment)
+        currentFragmentType = FragmentType.TRANSLATION_HISTORY
+        updateBottomNavigationState(FragmentType.TRANSLATION_HISTORY)
+    }
+
+    /**
      * 替换Fragment的通用方法
      */
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null) // 添加到返回栈，支持返回操作
             .commit()
     }
 
@@ -165,6 +217,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             FragmentType.CAMERA_TRANSLATION -> {
                 setNavigationItemSelected(binding.btnCameraTranslation, true)
+            }
+            FragmentType.TRANSLATION_HISTORY -> {
+                // 历史记录页面不需要底部导航选中状态
+                // 因为它是通过菜单进入的
             }
         }
     }

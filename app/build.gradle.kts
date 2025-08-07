@@ -126,6 +126,9 @@ dependencies {
     // 分页组件 - 大数据集处理
     implementation(libs.androidx.paging.runtime.ktx)  // Paging3运行时库
 
+    // UI组件 - 用户界面增强
+    implementation(libs.androidx.swiperefreshlayout)   // 下拉刷新组件
+
     // 测试依赖
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
+    android:background="@color/background_color_secondary">
+
+    <TextView
+        android:id="@+id/text_header_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/text_color_primary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="今天" />
+
+    <TextView
+        android:id="@+id/text_header_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_secondary"
+        android:textSize="12sp"
+        tools:text="5 条记录" />
+
+</LinearLayout>

@@ -5,6 +5,20 @@ import com.example.mytranslator.data.local.entity.TranslationHistoryEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
+ * 历史记录统计信息实体
+ *
+ * 用于数据库查询返回统计数据
+ * 注意：只包含查询返回的字段
+ */
+data class HistoryStatisticsEntity(
+    val totalCount: Int = 0,
+    val favoriteCount: Int = 0,
+    val todayCount: Int = 0,
+    val thisWeekCount: Int = 0,
+    val thisMonthCount: Int = 0
+)
+
+/**
  * 🏠 translationHistory分支 - 翻译历史记录数据访问对象
  * 
  * DAO (Data Access Object) 定义了与数据库交互的方法。
@@ -85,13 +99,32 @@ interface TranslationHistoryDao {
     
     /**
      * 获取收藏的翻译记录
-     * 
+     *
      * WHERE子句的使用：
      * - 筛选特定条件的记录
      * - 利用索引提升查询性能
      */
     @Query("SELECT * FROM translation_history WHERE is_favorite = 1 ORDER BY timestamp DESC")
     fun getFavoritesFlow(): Flow<List<TranslationHistoryEntity>>
+
+    /**
+     * 搜索翻译历史记录
+     *
+     * 模糊搜索的实现：
+     * - LIKE操作符进行模糊匹配
+     * - %通配符匹配任意字符
+     * - LOWER()函数实现大小写不敏感搜索
+     * - OR条件搜索多个字段
+     */
+    @Query("""
+        SELECT * FROM translation_history
+        WHERE LOWER(original_text) LIKE LOWER('%' || :query || '%')
+           OR LOWER(translated_text) LIKE LOWER('%' || :query || '%')
+           OR LOWER(source_language_name) LIKE LOWER('%' || :query || '%')
+           OR LOWER(target_language_name) LIKE LOWER('%' || :query || '%')
+        ORDER BY timestamp DESC
+    """)
+    fun searchHistory(query: String): Flow<List<TranslationHistoryEntity>>
     
     /**
      * 根据ID获取特定翻译记录
@@ -231,13 +264,43 @@ interface TranslationHistoryDao {
     
     /**
      * 获取最近的翻译记录
-     * 
+     *
      * LIMIT 1的使用：
      * - 只返回一条记录
      * - 获取最新/最旧记录
      */
     @Query("SELECT * FROM translation_history ORDER BY timestamp DESC LIMIT 1")
     suspend fun getLatestTranslation(): TranslationHistoryEntity?
+
+    // 🔄 ===== Repository层需要的额外方法 =====
+
+    /**
+     * 删除非收藏记录
+     *
+     * 用于清空历史记录但保留收藏
+     */
+    @Query("DELETE FROM translation_history WHERE is_favorite = 0")
+    suspend fun deleteNonFavorites(): Int
+
+    /**
+     * 获取历史记录统计信息的Flow
+     *
+     * 返回统计数据的响应式流
+     */
+    @Query("""
+        SELECT
+            COUNT(*) as totalCount,
+            SUM(CASE WHEN is_favorite = 1 THEN 1 ELSE 0 END) as favoriteCount,
+            SUM(CASE WHEN timestamp > :todayStart THEN 1 ELSE 0 END) as todayCount,
+            SUM(CASE WHEN timestamp > :weekStart THEN 1 ELSE 0 END) as thisWeekCount,
+            SUM(CASE WHEN timestamp > :monthStart THEN 1 ELSE 0 END) as thisMonthCount
+        FROM translation_history
+    """)
+    fun getHistoryStatistics(
+        todayStart: Long = System.currentTimeMillis() - 24 * 60 * 60 * 1000,
+        weekStart: Long = System.currentTimeMillis() - 7 * 24 * 60 * 60 * 1000,
+        monthStart: Long = System.currentTimeMillis() - 30L * 24 * 60 * 60 * 1000
+    ): Flow<HistoryStatisticsEntity>
 }
 
 /**

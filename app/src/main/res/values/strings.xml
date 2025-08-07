@@ -106,4 +106,23 @@
     <string name="language_tgk">Tajik</string>
     <string name="language_kur">Kurdish</string>
     <string name="language_tat">Tatar</string>
+
+    <!-- 翻译历史记录相关 -->
+    <string name="history_title">翻译历史</string>
+    <string name="history_tab_all">全部</string>
+    <string name="history_tab_favorites">收藏</string>
+    <string name="history_tab_today">今日</string>
+    <string name="history_statistics_placeholder">共 0 条记录</string>
+    <string name="history_empty_message">暂无翻译记录</string>
+    <string name="history_empty_hint">开始翻译后，记录将显示在这里</string>
+
+    <!-- 操作相关 -->
+    <string name="action_search">搜索</string>
+    <string name="action_sort">排序</string>
+    <string name="action_favorite">收藏</string>
+    <string name="action_delete">删除</string>
+    <string name="action_select_all">全选</string>
+    <string name="action_clear_history">清空历史</string>
+    <string name="action_history">历史记录</string>
+    <string name="action_settings">设置</string>
 </resources>
