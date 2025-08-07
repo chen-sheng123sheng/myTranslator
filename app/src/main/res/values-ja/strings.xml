@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+日语资源文件
+
+🎯 设计目的：
+1. 为日语用户提供本地化的界面文本
+2. 展示国际化系统的扩展性
+3. 提供专业的日语翻译
+
+🔧 技术要点：
+- values-ja 表示日语资源目录
+- 所有字符串名称必须与默认资源保持一致
+- 使用标准的日语表达方式
+
+📝 翻译说明：
+- 使用敬语形式，符合日语应用的习惯
+- 专业术语使用标准的日语表达
+- 保持简洁明了的表达方式
+-->
+<resources>
+    <!-- 应用基本信息 -->
+    <string name="app_name">私の翻訳者</string>
+    
+    <!-- 主界面功能 -->
+    <string name="text_translation">テキスト翻訳</string>
+    <string name="phonetic_translation">音声翻訳</string>
+    <string name="photo_translation">写真翻訳</string>
+    
+    <!-- 语言选择相关 -->
+    <string name="select_source_language">元言語を選択</string>
+    <string name="select_target_language">対象言語を選択</string>
+    <string name="search_languages">言語を検索...</string>
+    <string name="close">閉じる</string>
+    <string name="source_language_selected">元言語が選択されました：%s</string>
+    <string name="target_language_selected">対象言語が選択されました：%s</string>
+    
+    <!-- 语言名称 - 使用日语表达各种语言 -->
+    <string name="language_auto_detect">自動検出</string>
+    <string name="language_chinese">中国語</string>
+    <string name="language_english">英語</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_korean">韓国語</string>
+    <string name="language_french">フランス語</string>
+    <string name="language_german">ドイツ語</string>
+    <string name="language_spanish">スペイン語</string>
+    <string name="language_russian">ロシア語</string>
+    <string name="language_italian">イタリア語</string>
+    <string name="language_portuguese">ポルトガル語</string>
+    <string name="language_arabic">アラビア語</string>
+    <string name="language_thai">タイ語</string>
+    <string name="language_vietnamese">ベトナム語</string>
+</resources>

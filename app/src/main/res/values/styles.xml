@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- SearchView样式 -->
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorHint">?attr/colorOnSurfaceVariant</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="searchIcon">@drawable/ic_search_24</item>
+        <item name="closeIcon">@drawable/ic_close_24</item>
+    </style>
+</resources>

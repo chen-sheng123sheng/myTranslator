@@ -2,7 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 🌐 网络权限 - 翻译应用必需的权限 -->
+    <!-- INTERNET: 访问网络进行翻译API调用 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- ACCESS_NETWORK_STATE: 检查网络连接状态，提供更好的用户体验 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:name=".MyTranslatorApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

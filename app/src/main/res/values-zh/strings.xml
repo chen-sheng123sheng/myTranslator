@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+中文资源文件
+
+🎯 设计目的：
+1. 为中文用户提供本地化的界面文本
+2. 确保文本表达符合中文用户的习惯
+3. 提供专业、准确的翻译术语
+
+🔧 技术要点：
+- 文件名必须是 strings.xml
+- 目录名 values-zh 表示中文资源
+- string name 必须与默认资源文件中的 name 完全一致
+- 支持格式化字符串（如 %s, %d 等）
+
+📝 翻译原则：
+- 简洁明了：使用用户容易理解的词汇
+- 一致性：同一概念在整个应用中使用相同翻译
+- 本地化：考虑中文用户的使用习惯
+- 专业性：使用准确的技术术语
+-->
+<resources>
+    <!-- 应用基本信息 -->
+    <string name="app_name">我的翻译器</string>
+    
+    <!-- 主界面功能 -->
+    <string name="text_translation">文本翻译</string>
+    <string name="phonetic_translation">语音翻译</string>
+    <string name="photo_translation">拍照翻译</string>
+    
+    <!-- 语言选择相关 -->
+    <string name="select_source_language">选择源语言</string>
+    <string name="select_target_language">选择目标语言</string>
+    <string name="search_languages">搜索语言...</string>
+    <string name="close">关闭</string>
+    <string name="source_language_selected">已选择源语言：%s</string>
+    <string name="target_language_selected">已选择目标语言：%s</string>
+    
+    <!-- 语言名称 - 使用中文表达各种语言 -->
+    <string name="language_auto_detect">自动检测</string>
+    <string name="language_chinese">中文</string>
+    <string name="language_english">英语</string>
+    <string name="language_japanese">日语</string>
+    <string name="language_korean">韩语</string>
+    <string name="language_french">法语</string>
+    <string name="language_german">德语</string>
+    <string name="language_spanish">西班牙语</string>
+    <string name="language_russian">俄语</string>
+    <string name="language_italian">意大利语</string>
+    <string name="language_portuguese">葡萄牙语</string>
+    <string name="language_arabic">阿拉伯语</string>
+    <string name="language_thai">泰语</string>
+    <string name="language_vietnamese">越南语</string>
+</resources>

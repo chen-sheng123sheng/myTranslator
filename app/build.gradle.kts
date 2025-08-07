@@ -41,7 +41,9 @@ android {
             // 确保DEBUG字段正确设置
             buildConfigField("Boolean", "DEBUG", "true")
 
-            // 自定义BuildConfig字段
+            // 🔑 百度翻译API配置
+            buildConfigField("String", "BAIDU_APP_ID", "\"20250726002416270\"")
+            buildConfigField("String", "BAIDU_SECRET_KEY", "\"y56YShfSW4UVgFmmbliB\"")
             buildConfigField("String", "API_BASE_URL", "\"https://fanyi-api.baidu.com/\"")
             buildConfigField("boolean", "ENABLE_LOGGING", "true")
         }
@@ -68,7 +70,9 @@ android {
             // 确保DEBUG字段正确设置
             buildConfigField("Boolean", "DEBUG", "false")
 
-            // 生产环境配置
+            // 🔑 百度翻译API配置（生产环境）
+            buildConfigField("String", "BAIDU_APP_ID", "\"20250726002416270\"")
+            buildConfigField("String", "BAIDU_SECRET_KEY", "\"y56YShfSW4UVgFmmbliB\"")
             buildConfigField("String", "API_BASE_URL", "\"https://fanyi-api.baidu.com/\"")
             buildConfigField("boolean", "ENABLE_LOGGING", "false")
         }
@@ -89,12 +93,29 @@ android {
 }
 
 dependencies {
-
+    // 基础Android库
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // textTranslation分支新增依赖
+    // 网络请求 - Retrofit + OkHttp + Gson
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.gson)
+
+    // ViewModel和LiveData - MVVM架构
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.fragment.ktx)
+
+    // 协程 - 异步处理
+    implementation(libs.kotlinx.coroutines.android)
+
+    // 测试依赖
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

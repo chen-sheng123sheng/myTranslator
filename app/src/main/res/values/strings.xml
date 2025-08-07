@@ -1,6 +1,33 @@
 <resources>
+    <!-- 应用基本信息 -->
     <string name="app_name">myTranslator</string>
-    <string name="text_translation">文本翻译</string>
-    <string name="phonetic_translation">语音翻译</string>
-    <string name="photo_translation">拍照翻译</string>
+
+    <!-- 主界面功能 -->
+    <string name="text_translation">Text Translation</string>
+    <string name="phonetic_translation">Voice Translation</string>
+    <string name="photo_translation">Photo Translation</string>
+
+    <!-- 语言选择相关 -->
+    <string name="select_source_language">Select Source Language</string>
+    <string name="select_target_language">Select Target Language</string>
+    <string name="search_languages">Search languages...</string>
+    <string name="close">Close</string>
+    <string name="source_language_selected">Source language selected: %s</string>
+    <string name="target_language_selected">Target language selected: %s</string>
+
+    <!-- 语言名称 - 这些会根据用户的系统语言显示 -->
+    <string name="language_auto_detect">Auto Detect</string>
+    <string name="language_chinese">Chinese</string>
+    <string name="language_english">English</string>
+    <string name="language_japanese">Japanese</string>
+    <string name="language_korean">Korean</string>
+    <string name="language_french">French</string>
+    <string name="language_german">German</string>
+    <string name="language_spanish">Spanish</string>
+    <string name="language_russian">Russian</string>
+    <string name="language_italian">Italian</string>
+    <string name="language_portuguese">Portuguese</string>
+    <string name="language_arabic">Arabic</string>
+    <string name="language_thai">Thai</string>
+    <string name="language_vietnamese">Vietnamese</string>
 </resources>
