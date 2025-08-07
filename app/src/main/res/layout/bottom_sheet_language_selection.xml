@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+🎯 BottomSheet布局设计说明：
+
+1. 固定高度设计：
+   - 使用固定的520dp高度，不随内容变化
+   - 确保在不同屏幕尺寸上都有合适的显示效果
+   - 避免BottomSheet动态调整大小影响用户体验
+
+2. 滚动区域分离：
+   - 标题栏和搜索框固定在顶部
+   - 只有RecyclerView区域可以滚动
+   - 通过layout_weight="1"让RecyclerView占据剩余空间
+
+3. 用户体验优化：
+   - 保持BottomSheet大小固定，提供一致的交互体验
+   - 通过maxHeight限制RecyclerView最大高度
+   - 使用clipToPadding="false"优化滚动体验
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="520dp"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_background">
 
@@ -67,16 +85,26 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- 语言列表 -->
+    <!--
+    🎯 RecyclerView设计说明：
+    - layout_height="0dp" + layout_weight="1": 占据剩余所有空间
+    - maxHeight="380dp": 限制最大高度，为标题栏和搜索框留出空间
+    - clipToPadding="false": 允许内容滚动到padding区域，提供更好的视觉效果
+    - scrollbars="vertical": 显示垂直滚动条，让用户知道可以滚动
+    - nestedScrollingEnabled="true": 支持嵌套滚动，与BottomSheet协调工作
+    -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_languages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:maxHeight="400dp"
+        android:maxHeight="380dp"
         android:paddingHorizontal="8dp"
         android:paddingBottom="16dp"
         android:clipToPadding="false"
         android:scrollbars="vertical"
+        android:nestedScrollingEnabled="true"
+        android:overScrollMode="ifContentScrolls"
         tools:listitem="@layout/item_language" />
 
 </LinearLayout>

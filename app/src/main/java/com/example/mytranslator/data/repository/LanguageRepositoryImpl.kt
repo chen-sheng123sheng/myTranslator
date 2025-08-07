@@ -3,6 +3,7 @@ package com.example.mytranslator.data.repository
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.mytranslator.MyTranslatorApplication
 import com.example.mytranslator.data.config.ApiConfig
 import com.example.mytranslator.data.mapper.TranslationMapper
 import com.example.mytranslator.data.network.api.TranslationApi
@@ -72,9 +73,12 @@ class LanguageRepositoryImpl(
      *
      * 🎯 实现策略：
      * 1. 检查缓存是否有效
-     * 2. 尝试从API获取最新语言列表
-     * 3. 如果API失败，使用预定义的语言列表
-     * 4. 根据参数进行过滤和排序
+     * 2. 使用预定义的语言列表（百度翻译API不提供动态语言列表接口）
+     * 3. 根据参数进行过滤和排序
+     *
+     * 📝 说明：
+     * 百度翻译API没有提供获取支持语言列表的接口，
+     * 我们使用官方文档中的静态语种列表作为数据源。
      */
     override suspend fun getSupportedLanguages(
         includeAutoDetect: Boolean,
@@ -82,7 +86,7 @@ class LanguageRepositoryImpl(
     ): Result<List<Language>> = withContext(Dispatchers.IO) {
         try {
             Log.d(TAG, "🌐 开始获取支持的语言列表...")
-            
+
             // 检查缓存
             if (isCacheValid()) {
                 Log.d(TAG, "✅ 使用缓存的语言列表")
@@ -90,57 +94,188 @@ class LanguageRepositoryImpl(
                 return@withContext Result.success(languages)
             }
 
-            // 从API获取语言列表
-            val languages = fetchLanguagesFromApi()
-            
+            // 使用预定义的语言列表
+            val languages = getStaticLanguageList()
+
+            // 更新缓存
+            cachedLanguages = languages
+            cacheTimestamp = System.currentTimeMillis()
+
             // 处理语言列表
             val processedLanguages = procesLanguageList(languages, includeAutoDetect, sortByUsage)
-            
+
             Log.d(TAG, "✅ 成功获取 ${processedLanguages.size} 种语言")
             Result.success(processedLanguages)
 
         } catch (e: Exception) {
             Log.e(TAG, "❌ 获取语言列表失败", e)
-            
+
             // 回退到预定义语言列表
             val fallbackLanguages = Language.getSupportedLanguages()
             val processedLanguages = procesLanguageList(fallbackLanguages, includeAutoDetect, sortByUsage)
-            
+
             Log.w(TAG, "⚠️ 使用预定义语言列表，共 ${processedLanguages.size} 种语言")
             Result.success(processedLanguages)
         }
     }
 
     /**
-     * 从API获取语言列表
+     * 获取静态语言列表
+     *
+     * 基于百度翻译API官方文档的语种列表
+     * https://ai.baidu.com/ai-doc/MT/4kqryjku9#语种列表
+     *
+     * 📝 说明：百度翻译API没有提供获取支持语言列表的接口，
+     * 我们使用官方文档中的静态语种列表作为数据源。
+     *
+     * 🌍 国际化设计：
+     * - 使用语言代码作为key，通过strings.xml获取本地化名称
+     * - 支持中英文显示，根据用户系统语言自动切换
+     * - 便于维护和扩展更多语言支持
      */
-    private suspend fun fetchLanguagesFromApi(): List<Language> {
-        Log.d(TAG, "📡 从百度翻译API获取语言列表...")
-        
-        val response = translationApi.getSupportedLanguages(
-            appId = ApiConfig.BaiduTranslation.APP_ID
+    private fun getStaticLanguageList(): List<Language> {
+        Log.d(TAG, "📋 使用静态语言列表...")
+
+        return listOf(
+            // 自动检测
+            createLanguageWithI18n("auto"),
+
+            // 常用语言（按使用频率排序）
+            createLanguageWithI18n("zh"),
+            createLanguageWithI18n("en"),
+            createLanguageWithI18n("jp"),
+            createLanguageWithI18n("kor"),
+            createLanguageWithI18n("fra"),
+            createLanguageWithI18n("de"),
+            createLanguageWithI18n("spa"),
+            createLanguageWithI18n("it"),
+            createLanguageWithI18n("pt"),
+            createLanguageWithI18n("ru"),
+            createLanguageWithI18n("ara"),
+            createLanguageWithI18n("th"),
+            createLanguageWithI18n("vie"),
+            createLanguageWithI18n("nl"),
+            createLanguageWithI18n("hi"),
+            createLanguageWithI18n("id"),
+            createLanguageWithI18n("may"),
+            createLanguageWithI18n("cht"),
+            createLanguageWithI18n("per"),
+
+            // 欧洲语言
+            createLanguageWithI18n("nor"),
+            createLanguageWithI18n("swe"),
+            createLanguageWithI18n("dan"),
+            createLanguageWithI18n("fin"),
+            createLanguageWithI18n("cs"),
+            createLanguageWithI18n("sk"),
+            createLanguageWithI18n("hu"),
+            createLanguageWithI18n("rom"),
+            createLanguageWithI18n("bul"),
+            createLanguageWithI18n("hrv"),
+            createLanguageWithI18n("srp"),
+            createLanguageWithI18n("slo"),
+            createLanguageWithI18n("ukr"),
+            createLanguageWithI18n("bel"),
+            createLanguageWithI18n("est"),
+            createLanguageWithI18n("lav"),
+            createLanguageWithI18n("lit"),
+            createLanguageWithI18n("pl"),
+            createLanguageWithI18n("tr"),
+            createLanguageWithI18n("el"),
+            createLanguageWithI18n("heb"),
+
+            // 南亚和东南亚语言
+            createLanguageWithI18n("urd"),
+            createLanguageWithI18n("ben"),
+            createLanguageWithI18n("tam"),
+            createLanguageWithI18n("tel"),
+            createLanguageWithI18n("kan"),
+            createLanguageWithI18n("mal"),
+            createLanguageWithI18n("guj"),
+            createLanguageWithI18n("pan"),
+            createLanguageWithI18n("sin"),
+            createLanguageWithI18n("nep"),
+            createLanguageWithI18n("asm"),
+            createLanguageWithI18n("ori"),
+            createLanguageWithI18n("fil"),
+            createLanguageWithI18n("tgl"),
+            createLanguageWithI18n("hkm"),
+            createLanguageWithI18n("bur"),
+
+            // 非洲语言
+            createLanguageWithI18n("swa"),
+            createLanguageWithI18n("som"),
+            createLanguageWithI18n("amh"),
+            createLanguageWithI18n("xho"),
+            createLanguageWithI18n("afr"),
+
+            // 其他欧洲语言
+            createLanguageWithI18n("ice"),
+            createLanguageWithI18n("wel"),
+            createLanguageWithI18n("gle"),
+            createLanguageWithI18n("baq"),
+            createLanguageWithI18n("cat"),
+            createLanguageWithI18n("glg"),
+            createLanguageWithI18n("mlt"),
+            createLanguageWithI18n("lat"),
+            createLanguageWithI18n("epo"),
+
+            // 中亚和高加索语言
+            createLanguageWithI18n("arm"),
+            createLanguageWithI18n("geo"),
+            createLanguageWithI18n("aze"),
+            createLanguageWithI18n("tgk"),
+            createLanguageWithI18n("kur"),
+            createLanguageWithI18n("tat")
+        )
+    }
+
+    /**
+     * 创建国际化的Language对象
+     *
+     * 🌍 国际化设计说明：
+     * 这个方法通过语言代码从strings.xml中获取本地化的语言名称，
+     * 实现了真正的国际化支持。
+     *
+     * 🎯 设计优势：
+     * 1. 分离关注点 - UI文本与业务逻辑分离
+     * 2. 易于维护 - 所有语言名称集中在strings.xml中
+     * 3. 国际化支持 - 根据用户系统语言自动显示
+     * 4. 扩展性 - 可以轻松添加更多语言支持
+     *
+     * @param languageCode 语言代码（如"zh", "en", "jp"等）
+     * @return 包含国际化名称的Language对象
+     */
+    private fun createLanguageWithI18n(languageCode: String): Language {
+        // 获取应用上下文
+        val context = MyTranslatorApplication.instance
+
+        // 构建资源名称
+        val resourceName = "language_$languageCode"
+
+        // 获取资源ID
+        val resourceId = context.resources.getIdentifier(
+            resourceName,
+            "string",
+            context.packageName
         )
 
-        if (!response.isSuccessful) {
-            throw Exception("API请求失败: HTTP ${response.code()}")
+        // 获取本地化的语言名称
+        val localizedName = if (resourceId != 0) {
+            context.getString(resourceId)
+        } else {
+            // 如果没有找到对应的资源，使用语言代码作为fallback
+            languageCode.uppercase()
         }
 
-        val responseBody = response.body()
-            ?: throw Exception("API响应体为空")
-
-        if (!responseBody.isSuccessful()) {
-            throw Exception("API返回错误: ${responseBody.errorMessage}")
-        }
-
-        // 使用Mapper转换API响应
-        val languages = TranslationMapper.toSupportedLanguages(responseBody)
-        
-        // 更新缓存
-        cachedLanguages = languages
-        cacheTimestamp = System.currentTimeMillis()
-        
-        Log.d(TAG, "✅ 从API获取到 ${languages.size} 种语言")
-        return languages
+        // 创建Language对象
+        // 注意：这里我们使用本地化名称作为name和displayName
+        // 在实际应用中，可能需要更复杂的逻辑来处理英文名称和本地名称
+        return Language(
+            code = languageCode,
+            name = localizedName,  // 使用本地化名称
+            displayName = localizedName  // 使用本地化名称
+        )
     }
 
     /**

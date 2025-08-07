@@ -51,19 +51,19 @@ object LanguageLocalizer {
      */
     private val languageResourceMap = mapOf(
         "auto" to R.string.language_auto_detect,
-        "zh" to R.string.language_chinese,
-        "en" to R.string.language_english,
-        "ja" to R.string.language_japanese,
-        "ko" to R.string.language_korean,
-        "fr" to R.string.language_french,
-        "de" to R.string.language_german,
-        "es" to R.string.language_spanish,
-        "ru" to R.string.language_russian,
-        "it" to R.string.language_italian,
-        "pt" to R.string.language_portuguese,
-        "ar" to R.string.language_arabic,
-        "th" to R.string.language_thai,
-        "vi" to R.string.language_vietnamese
+        "zh" to R.string.language_zh,
+        "en" to R.string.language_en,
+        "jp" to R.string.language_jp,
+        "kor" to R.string.language_kor,
+        "fra" to R.string.language_fra,
+        "de" to R.string.language_de,
+        "spa" to R.string.language_spa,
+        "ru" to R.string.language_ru,
+        "it" to R.string.language_it,
+        "pt" to R.string.language_pt,
+        "ara" to R.string.language_ara,
+        "th" to R.string.language_th,
+        "vie" to R.string.language_vie
     )
 
     /**

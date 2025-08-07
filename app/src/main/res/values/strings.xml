@@ -16,18 +16,94 @@
     <string name="target_language_selected">Target language selected: %s</string>
 
     <!-- 语言名称 - 这些会根据用户的系统语言显示 -->
+    <!-- 🎯 设计说明：为77种静态语言提供英文显示名称 -->
+
+    <!-- 自动检测和常用语言 -->
     <string name="language_auto_detect">Auto Detect</string>
-    <string name="language_chinese">Chinese</string>
-    <string name="language_english">English</string>
-    <string name="language_japanese">Japanese</string>
-    <string name="language_korean">Korean</string>
-    <string name="language_french">French</string>
-    <string name="language_german">German</string>
-    <string name="language_spanish">Spanish</string>
-    <string name="language_russian">Russian</string>
-    <string name="language_italian">Italian</string>
-    <string name="language_portuguese">Portuguese</string>
-    <string name="language_arabic">Arabic</string>
-    <string name="language_thai">Thai</string>
-    <string name="language_vietnamese">Vietnamese</string>
+    <string name="language_zh">Chinese (Simplified)</string>
+    <string name="language_en">English</string>
+    <string name="language_jp">Japanese</string>
+    <string name="language_kor">Korean</string>
+    <string name="language_fra">French</string>
+    <string name="language_de">German</string>
+    <string name="language_spa">Spanish</string>
+    <string name="language_it">Italian</string>
+    <string name="language_pt">Portuguese</string>
+    <string name="language_ru">Russian</string>
+    <string name="language_ara">Arabic</string>
+    <string name="language_th">Thai</string>
+    <string name="language_vie">Vietnamese</string>
+    <string name="language_nl">Dutch</string>
+    <string name="language_hi">Hindi</string>
+    <string name="language_id">Indonesian</string>
+    <string name="language_may">Malay</string>
+    <string name="language_cht">Chinese (Traditional)</string>
+    <string name="language_per">Persian</string>
+
+    <!-- 欧洲语言 -->
+    <string name="language_nor">Norwegian</string>
+    <string name="language_swe">Swedish</string>
+    <string name="language_dan">Danish</string>
+    <string name="language_fin">Finnish</string>
+    <string name="language_cs">Czech</string>
+    <string name="language_sk">Slovak</string>
+    <string name="language_hu">Hungarian</string>
+    <string name="language_rom">Romanian</string>
+    <string name="language_bul">Bulgarian</string>
+    <string name="language_hrv">Croatian</string>
+    <string name="language_srp">Serbian</string>
+    <string name="language_slo">Slovenian</string>
+    <string name="language_ukr">Ukrainian</string>
+    <string name="language_bel">Belarusian</string>
+    <string name="language_est">Estonian</string>
+    <string name="language_lav">Latvian</string>
+    <string name="language_lit">Lithuanian</string>
+    <string name="language_pl">Polish</string>
+    <string name="language_tr">Turkish</string>
+    <string name="language_el">Greek</string>
+    <string name="language_heb">Hebrew</string>
+
+    <!-- 南亚和东南亚语言 -->
+    <string name="language_urd">Urdu</string>
+    <string name="language_ben">Bengali</string>
+    <string name="language_tam">Tamil</string>
+    <string name="language_tel">Telugu</string>
+    <string name="language_kan">Kannada</string>
+    <string name="language_mal">Malayalam</string>
+    <string name="language_guj">Gujarati</string>
+    <string name="language_pan">Punjabi</string>
+    <string name="language_sin">Sinhala</string>
+    <string name="language_nep">Nepali</string>
+    <string name="language_asm">Assamese</string>
+    <string name="language_ori">Oriya</string>
+    <string name="language_fil">Filipino</string>
+    <string name="language_tgl">Tagalog</string>
+    <string name="language_hkm">Khmer</string>
+    <string name="language_bur">Burmese</string>
+
+    <!-- 非洲语言 -->
+    <string name="language_swa">Swahili</string>
+    <string name="language_som">Somali</string>
+    <string name="language_amh">Amharic</string>
+    <string name="language_xho">Xhosa</string>
+    <string name="language_afr">Afrikaans</string>
+
+    <!-- 其他欧洲语言 -->
+    <string name="language_ice">Icelandic</string>
+    <string name="language_wel">Welsh</string>
+    <string name="language_gle">Irish</string>
+    <string name="language_baq">Basque</string>
+    <string name="language_cat">Catalan</string>
+    <string name="language_glg">Galician</string>
+    <string name="language_mlt">Maltese</string>
+    <string name="language_lat">Latin</string>
+    <string name="language_epo">Esperanto</string>
+
+    <!-- 中亚和高加索语言 -->
+    <string name="language_arm">Armenian</string>
+    <string name="language_geo">Georgian</string>
+    <string name="language_aze">Azerbaijani</string>
+    <string name="language_tgk">Tajik</string>
+    <string name="language_kur">Kurdish</string>
+    <string name="language_tat">Tatar</string>
 </resources>

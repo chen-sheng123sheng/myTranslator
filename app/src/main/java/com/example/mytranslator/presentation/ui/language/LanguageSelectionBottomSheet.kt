@@ -1,17 +1,22 @@
 package com.example.mytranslator.presentation.ui.language
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mytranslator.R
 import com.example.mytranslator.common.utils.LanguageLocalizer
 import com.example.mytranslator.databinding.BottomSheetLanguageSelectionBinding
 import com.example.mytranslator.domain.model.Language
 import com.example.mytranslator.presentation.viewmodel.LanguageSelectionViewModel
 import com.example.mytranslator.presentation.viewmodel.ViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
@@ -91,6 +96,65 @@ class LanguageSelectionBottomSheet : BottomSheetDialogFragment() {
     enum class SelectionType {
         SOURCE,  // 源语言选择
         TARGET   // 目标语言选择
+    }
+
+    /**
+     * 创建Dialog并配置BottomSheet行为
+     *
+     * 🎯 设计说明：
+     * 重写onCreateDialog方法来精确控制BottomSheet的行为：
+     * 1. 设置固定高度，防止动态调整
+     * 2. 禁用拖拽调整大小功能
+     * 3. 设置合适的peek高度
+     * 4. 确保RecyclerView独立滚动
+     *
+     * 🔧 技术实现：
+     * - 使用BottomSheetBehavior控制行为
+     * - 设置STATE_EXPANDED确保完全展开
+     * - 禁用isDraggable防止用户拖拽调整
+     * - 设置固定的peekHeight
+     */
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
+
+        dialog.setOnShowListener { dialogInterface ->
+            val bottomSheetDialog = dialogInterface as BottomSheetDialog
+            val bottomSheet = bottomSheetDialog.findViewById<FrameLayout>(
+                com.google.android.material.R.id.design_bottom_sheet
+            )
+
+            bottomSheet?.let {
+                val behavior = BottomSheetBehavior.from(it)
+
+                // 设置固定高度（520dp转换为像素）
+                val heightInPx = (520 * resources.displayMetrics.density).toInt()
+
+                // 配置BottomSheet行为
+                behavior.apply {
+                    // 设置peek高度为完整高度，确保一开始就完全显示
+                    peekHeight = heightInPx
+
+                    // 禁用拖拽调整大小
+                    isDraggable = false
+
+                    // 设置为展开状态
+                    state = BottomSheetBehavior.STATE_EXPANDED
+
+                    // 禁用半展开状态
+                    isFitToContents = true
+
+                    // 设置最大高度
+                    maxHeight = heightInPx
+                }
+
+                // 设置底部sheet的固定高度
+                val layoutParams = it.layoutParams
+                layoutParams.height = heightInPx
+                it.layoutParams = layoutParams
+            }
+        }
+
+        return dialog
     }
 
     override fun onCreateView(

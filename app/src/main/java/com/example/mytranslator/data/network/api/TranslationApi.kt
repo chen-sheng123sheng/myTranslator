@@ -98,18 +98,14 @@ interface TranslationApi {
     /**
      * 获取支持的语言列表
      *
-     * 🎯 设计考虑：
-     * - 动态获取API支持的语言
-     * - 支持语言列表的更新
-     * - 为语言选择提供数据源
+     * 📝 注意：百度翻译API没有提供获取支持语言列表的接口
+     * 我们使用官方文档中的静态语种列表作为数据源
      *
-     * @param appId 应用ID（可选）
-     * @return 支持的语言列表响应
+     * 此方法已被移除，语言列表通过静态数据提供
+     * 参考：https://ai.baidu.com/ai-doc/MT/4kqryjku9#语种列表
      */
-    @GET("api/trans/vip/languagelist")
-    suspend fun getSupportedLanguages(
-        @Query("appid") appId: String? = null
-    ): Response<SupportedLanguagesResponse>
+    // @GET("api/trans/vip/languagelist")  // 此接口不存在
+    // suspend fun getSupportedLanguages(...): Response<SupportedLanguagesResponse>
 
     /**
      * 批量翻译

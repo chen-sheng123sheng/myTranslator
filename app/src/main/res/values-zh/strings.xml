@@ -37,18 +37,94 @@
     <string name="target_language_selected">已选择目标语言：%s</string>
     
     <!-- 语言名称 - 使用中文表达各种语言 -->
+    <!-- 🎯 设计说明：为77种静态语言提供中文显示名称 -->
+
+    <!-- 自动检测和常用语言 -->
     <string name="language_auto_detect">自动检测</string>
-    <string name="language_chinese">中文</string>
-    <string name="language_english">英语</string>
-    <string name="language_japanese">日语</string>
-    <string name="language_korean">韩语</string>
-    <string name="language_french">法语</string>
-    <string name="language_german">德语</string>
-    <string name="language_spanish">西班牙语</string>
-    <string name="language_russian">俄语</string>
-    <string name="language_italian">意大利语</string>
-    <string name="language_portuguese">葡萄牙语</string>
-    <string name="language_arabic">阿拉伯语</string>
-    <string name="language_thai">泰语</string>
-    <string name="language_vietnamese">越南语</string>
+    <string name="language_zh">中文(简体)</string>
+    <string name="language_en">英语</string>
+    <string name="language_jp">日语</string>
+    <string name="language_kor">韩语</string>
+    <string name="language_fra">法语</string>
+    <string name="language_de">德语</string>
+    <string name="language_spa">西班牙语</string>
+    <string name="language_it">意大利语</string>
+    <string name="language_pt">葡萄牙语</string>
+    <string name="language_ru">俄语</string>
+    <string name="language_ara">阿拉伯语</string>
+    <string name="language_th">泰语</string>
+    <string name="language_vie">越南语</string>
+    <string name="language_nl">荷兰语</string>
+    <string name="language_hi">印地语</string>
+    <string name="language_id">印尼语</string>
+    <string name="language_may">马来语</string>
+    <string name="language_cht">中文(繁体)</string>
+    <string name="language_per">波斯语</string>
+
+    <!-- 欧洲语言 -->
+    <string name="language_nor">挪威语</string>
+    <string name="language_swe">瑞典语</string>
+    <string name="language_dan">丹麦语</string>
+    <string name="language_fin">芬兰语</string>
+    <string name="language_cs">捷克语</string>
+    <string name="language_sk">斯洛伐克语</string>
+    <string name="language_hu">匈牙利语</string>
+    <string name="language_rom">罗马尼亚语</string>
+    <string name="language_bul">保加利亚语</string>
+    <string name="language_hrv">克罗地亚语</string>
+    <string name="language_srp">塞尔维亚语</string>
+    <string name="language_slo">斯洛文尼亚语</string>
+    <string name="language_ukr">乌克兰语</string>
+    <string name="language_bel">白俄罗斯语</string>
+    <string name="language_est">爱沙尼亚语</string>
+    <string name="language_lav">拉脱维亚语</string>
+    <string name="language_lit">立陶宛语</string>
+    <string name="language_pl">波兰语</string>
+    <string name="language_tr">土耳其语</string>
+    <string name="language_el">希腊语</string>
+    <string name="language_heb">希伯来语</string>
+
+    <!-- 南亚和东南亚语言 -->
+    <string name="language_urd">乌尔都语</string>
+    <string name="language_ben">孟加拉语</string>
+    <string name="language_tam">泰米尔语</string>
+    <string name="language_tel">泰卢固语</string>
+    <string name="language_kan">卡纳达语</string>
+    <string name="language_mal">马拉雅拉姆语</string>
+    <string name="language_guj">古吉拉特语</string>
+    <string name="language_pan">旁遮普语</string>
+    <string name="language_sin">僧伽罗语</string>
+    <string name="language_nep">尼泊尔语</string>
+    <string name="language_asm">阿萨姆语</string>
+    <string name="language_ori">奥里亚语</string>
+    <string name="language_fil">菲律宾语</string>
+    <string name="language_tgl">他加禄语</string>
+    <string name="language_hkm">高棉语</string>
+    <string name="language_bur">缅甸语</string>
+
+    <!-- 非洲语言 -->
+    <string name="language_swa">斯瓦希里语</string>
+    <string name="language_som">索马里语</string>
+    <string name="language_amh">阿姆哈拉语</string>
+    <string name="language_xho">科萨语</string>
+    <string name="language_afr">南非荷兰语</string>
+
+    <!-- 其他欧洲语言 -->
+    <string name="language_ice">冰岛语</string>
+    <string name="language_wel">威尔士语</string>
+    <string name="language_gle">爱尔兰语</string>
+    <string name="language_baq">巴斯克语</string>
+    <string name="language_cat">加泰罗尼亚语</string>
+    <string name="language_glg">加利西亚语</string>
+    <string name="language_mlt">马耳他语</string>
+    <string name="language_lat">拉丁语</string>
+    <string name="language_epo">世界语</string>
+
+    <!-- 中亚和高加索语言 -->
+    <string name="language_arm">亚美尼亚语</string>
+    <string name="language_geo">格鲁吉亚语</string>
+    <string name="language_aze">阿塞拜疆语</string>
+    <string name="language_tgk">塔吉克语</string>
+    <string name="language_kur">库尔德语</string>
+    <string name="language_tat">鞑靼语</string>
 </resources>

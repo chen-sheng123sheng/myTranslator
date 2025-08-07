@@ -42,8 +42,31 @@ class MyTranslatorApplication : Application() {
 
     private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
+    companion object {
+        private const val TAG = "MyTranslatorApplication"
+
+        /**
+         * 全局应用实例
+         *
+         * 🎯 设计说明：
+         * 提供全局访问应用上下文的方式，主要用于：
+         * 1. 国际化资源访问
+         * 2. 全局配置获取
+         * 3. 系统服务访问
+         *
+         * ⚠️ 注意：
+         * 虽然提供了全局访问，但应该谨慎使用，
+         * 优先通过依赖注入或参数传递的方式获取Context
+         */
+        lateinit var instance: MyTranslatorApplication
+            private set
+    }
+
     override fun onCreate() {
         super.onCreate()
+
+        // 初始化全局实例
+        instance = this
 
         Log.i(TAG, "🚀 MyTranslator应用启动")
         Log.i(TAG, getVersionInfo())
@@ -210,28 +233,25 @@ class MyTranslatorApplication : Application() {
         }
     }
 
-    companion object {
-        private const val TAG = "MyTranslatorApp"
+    /**
+     * 获取应用版本信息
+     */
+    private fun getVersionInfo(): String {
+        return "MyTranslator v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+    }
 
-        /**
-         * 获取应用版本信息
-         */
-        fun getVersionInfo(): String {
-            return "MyTranslator v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-        }
+    /**
+     * 检查是否为调试版本
+     */
+    fun isDebugBuild(): Boolean {
+        return BuildConfig.DEBUG
+    }
 
-        /**
-         * 检查是否为调试版本
-         */
-        fun isDebugBuild(): Boolean {
-            return BuildConfig.DEBUG
-        }
-
-        /**
-         * 获取API配置信息
-         */
-        fun getApiConfigInfo(): String {
-            return ApiConfig.BaiduTranslation.getConfigInfo()
-        }
+    /**
+     * 获取API配置信息
+     */
+    fun getApiConfigInfo(): String {
+        return ApiConfig.BaiduTranslation.getConfigInfo()
     }
 }
+
