@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.example.mytranslator.data.config.ApiConfig
 import com.example.mytranslator.common.utils.ApiTestHelper
+import com.example.mytranslator.common.utils.DatabaseTestHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -53,9 +54,10 @@ class MyTranslatorApplication : Application() {
         // 初始化其他组件
         initializeOtherComponents()
 
-        // 在调试模式下运行API测试
+        // 在调试模式下运行测试
         if (BuildConfig.DEBUG) {
             runApiTests()
+            runDatabaseTests()
         }
     }
 
@@ -122,6 +124,38 @@ class MyTranslatorApplication : Application() {
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "API测试过程中发生异常", e)
+            }
+        }
+    }
+
+    /**
+     * 运行数据库测试（仅在调试模式下）
+     *
+     * 🎯 测试目的：
+     * - 验证Room数据库配置是否正确
+     * - 测试数据库连接和基本操作
+     * - 提供详细的诊断信息
+     * - 帮助开发者快速定位问题
+     */
+    private fun runDatabaseTests() {
+        Log.d(TAG, "🏠 开始运行数据库测试...")
+
+        // 先显示快速诊断信息
+        Log.d(TAG, DatabaseTestHelper.getQuickDiagnosis(this))
+
+        // 异步运行完整测试
+        applicationScope.launch {
+            try {
+                val testReport = DatabaseTestHelper.runFullTest(this@MyTranslatorApplication)
+                Log.i(TAG, testReport.getSummary())
+
+                if (testReport.isAllTestsPassed()) {
+                    Log.i(TAG, "🎉 所有数据库测试通过，历史记录功能可正常使用")
+                } else {
+                    Log.w(TAG, "⚠️ 部分数据库测试失败，可能影响历史记录功能")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "数据库测试过程中发生异常", e)
             }
         }
     }

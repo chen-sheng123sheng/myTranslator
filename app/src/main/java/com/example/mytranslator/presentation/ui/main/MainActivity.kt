@@ -9,11 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.example.mytranslator.BuildConfig
 import com.example.mytranslator.R
 import com.example.mytranslator.common.base.BaseActivity
 import com.example.mytranslator.databinding.ActivityMainBinding
-
 import com.example.mytranslator.presentation.ui.translation.text.TextTranslationFragment
 
 /**

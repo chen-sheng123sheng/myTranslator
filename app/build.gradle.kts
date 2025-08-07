@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    // 🏠 translationHistory分支新增：Room需要kapt进行注解处理
+    id("kotlin-kapt")
 }
 
 android {
@@ -115,8 +117,21 @@ dependencies {
     // 协程 - 异步处理
     implementation(libs.kotlinx.coroutines.android)
 
+    // 🏠 translationHistory分支新增依赖
+    // Room数据库 - 本地数据持久化
+    implementation(libs.androidx.room.runtime)     // Room运行时库
+    implementation(libs.androidx.room.ktx)         // Room Kotlin扩展（协程支持）
+    kapt(libs.androidx.room.compiler)              // Room注解处理器（编译时生成代码）
+
+    // 分页组件 - 大数据集处理
+    implementation(libs.androidx.paging.runtime.ktx)  // Paging3运行时库
+
     // 测试依赖
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // 🧪 Room测试支持
+    testImplementation(libs.androidx.room.testing)      // Room测试工具
+    androidTestImplementation(libs.androidx.test.core)  // Android测试核心库
 }
