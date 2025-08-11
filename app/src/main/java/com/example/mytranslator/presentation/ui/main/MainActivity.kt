@@ -15,6 +15,7 @@ import com.example.mytranslator.common.base.BaseActivity
 import com.example.mytranslator.databinding.ActivityMainBinding
 import com.example.mytranslator.presentation.ui.translation.text.TextTranslationFragment
 import com.example.mytranslator.presentation.ui.history.TranslationHistoryFragment
+import com.example.mytranslator.presentation.ui.settings.SimpleSettingsActivity
 
 /**
  * 主界面Activity
@@ -115,8 +116,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             R.id.action_settings -> {
                 Log.d(TAG, "点击设置菜单")
-                // TODO: 实现设置页面
-                showComingSoonMessage("设置功能即将上线")
+                showSettingsActivity()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -188,6 +188,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         replaceFragment(fragment)
         currentFragmentType = FragmentType.TRANSLATION_HISTORY
         updateBottomNavigationState(FragmentType.TRANSLATION_HISTORY)
+    }
+
+    /**
+     * 显示设置Activity
+     */
+    private fun showSettingsActivity() {
+        Log.d(TAG, "⚙️ 显示设置Activity")
+
+        val intent = Intent(this, SimpleSettingsActivity::class.java)
+        startActivity(intent)
     }
 
     /**

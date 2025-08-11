@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".presentation.ui.login.QRCodeLoginActivity">
+
+    <!-- 应用栏 -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary_color"
+            app:title="扫码登录"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 主要内容 -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <!-- 标题区域 -->
+            <TextView
+                android:id="@+id/text_qrcode_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信扫码登录"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_color_primary"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 描述文本 -->
+            <TextView
+                android:id="@+id/text_qrcode_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请使用微信扫描下方二维码"
+                android:textSize="16sp"
+                android:textColor="@color/text_color_secondary"
+                android:layout_marginBottom="32dp"
+                android:gravity="center" />
+
+            <!-- 二维码容器 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/white">
+
+                <FrameLayout
+                    android:layout_width="320dp"
+                    android:layout_height="320dp"
+                    android:padding="16dp">
+
+                    <!-- 二维码图片 -->
+                    <ImageView
+                        android:id="@+id/image_qrcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerInside"
+                        android:contentDescription="微信登录二维码"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        tools:src="@drawable/ic_qrcode_placeholder" />
+
+                    <!-- 加载进度条 -->
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        app:indicatorColor="@color/primary_color"
+                        app:trackColor="@color/primary_color_light"
+                        tools:visibility="gone" />
+
+                    <!-- 二维码装饰边框 -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/qrcode_border" />
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 状态文本 -->
+            <TextView
+                android:id="@+id/text_qrcode_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正在生成二维码..."
+                android:textSize="16sp"
+                android:textColor="@color/text_color_secondary"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                tools:text="请使用微信扫描二维码" />
+
+            <!-- 操作按钮区域 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp">
+
+                <!-- 刷新二维码按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_refresh_qrcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="刷新二维码"
+                    android:textSize="16sp"
+                    android:textColor="@color/primary_color"
+                    android:backgroundTint="@color/white"
+                    app:strokeColor="@color/primary_color"
+                    app:strokeWidth="2dp"
+                    app:icon="@drawable/ic_refresh"
+                    app:iconTint="@color/primary_color"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="28dp"
+                    android:layout_marginBottom="12dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+
+                <!-- 切换到应用内登录按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_switch_to_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="使用应用内登录"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/wechat_green"
+                    app:icon="@drawable/ic_wechat"
+                    app:iconTint="@color/white"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="28dp"
+                    android:layout_marginBottom="12dp"
+                    style="@style/Widget.Material3.Button" />
+
+                <!-- 返回按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="返回"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_color_secondary"
+                    android:backgroundTint="@android:color/transparent"
+                    app:strokeWidth="0dp"
+                    app:cornerRadius="24dp"
+                    style="@style/Widget.Material3.Button.TextButton" />
+
+            </LinearLayout>
+
+            <!-- 提示信息 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="32dp"
+                android:padding="16dp"
+                android:background="@drawable/info_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="扫码登录说明："
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_color_primary"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. 打开微信，点击右上角加号\n2. 选择扫一扫功能\n3. 扫描上方二维码\n4. 在微信中确认登录"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_color_secondary"
+                    android:lineSpacingExtra="2dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

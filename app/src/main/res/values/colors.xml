@@ -3,6 +3,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <!-- 登录模块相关颜色 -->
+    <color name="wechat_green">#07C160</color>
+    <color name="background_primary">#FFFFFF</color>
+    <color name="text_primary">#1F2937</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_hint">#9CA3AF</color>
+    <color name="divider">#E5E7EB</color>
+
     <!-- 应用主题颜色 -->
     <color name="primary_color">#FF2196F3</color>
     <color name="primary_dark_color">#FF1976D2</color>
@@ -30,4 +38,9 @@
 
     <!-- 透明度变体 -->
     <color name="white_70">#B3FFFFFF</color>
+
+    <!-- 登录相关颜色 -->
+    <color name="primary_color_light">#64B5F6</color>
+    <color name="primary_color_dark">#1976D2</color>
+    <color name="primary_color_darker">#0D47A1</color>
 </resources>

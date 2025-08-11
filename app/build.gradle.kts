@@ -47,6 +47,11 @@ android {
             buildConfigField("String", "BAIDU_APP_ID", "\"20250726002416270\"")
             buildConfigField("String", "BAIDU_SECRET_KEY", "\"y56YShfSW4UVgFmmbliB\"")
             buildConfigField("String", "API_BASE_URL", "\"https://fanyi-api.baidu.com/\"")
+
+            // 🔑 微信登录配置（开发环境）
+            buildConfigField("String", "WECHAT_APP_ID", "\"${findProperty("WECHAT_APP_ID") ?: ""}\"")
+            buildConfigField("String", "WECHAT_APP_SECRET", "\"${findProperty("WECHAT_APP_SECRET") ?: ""}\"")
+
             buildConfigField("boolean", "ENABLE_LOGGING", "true")
         }
 
@@ -76,6 +81,11 @@ android {
             buildConfigField("String", "BAIDU_APP_ID", "\"20250726002416270\"")
             buildConfigField("String", "BAIDU_SECRET_KEY", "\"y56YShfSW4UVgFmmbliB\"")
             buildConfigField("String", "API_BASE_URL", "\"https://fanyi-api.baidu.com/\"")
+
+            // 🔑 微信登录配置（生产环境）
+            buildConfigField("String", "WECHAT_APP_ID", "\"${findProperty("WECHAT_APP_ID") ?: ""}\"")
+            buildConfigField("String", "WECHAT_APP_SECRET", "\"${findProperty("WECHAT_APP_SECRET") ?: ""}\"")
+
             buildConfigField("boolean", "ENABLE_LOGGING", "false")
         }
     }
@@ -95,6 +105,9 @@ android {
 }
 
 dependencies {
+    // 🔐 Login模块 - 独立的登录功能模块
+    implementation(project(":libraries:login"))
+
     // 基础Android库
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -128,6 +141,11 @@ dependencies {
 
     // UI组件 - 用户界面增强
     implementation(libs.androidx.swiperefreshlayout)   // 下拉刷新组件
+
+    // 第三方登录和二维码功能已迁移到login模块
+    // implementation(libs.wechat.sdk)     // 已在login模块中
+    // implementation(libs.zxing.core)     // 已在login模块中
+    // implementation(libs.zxing.android)  // 已在login模块中
 
     // 测试依赖
     testImplementation(libs.junit)

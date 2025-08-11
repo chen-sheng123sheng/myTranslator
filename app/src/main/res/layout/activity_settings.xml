@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".presentation.ui.settings.SettingsActivity">
+
+    <!-- 应用栏 -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_settings"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary_color"
+            app:title="设置"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 主要内容 -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 用户信息卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/white"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <!-- 用户头像 -->
+                    <ImageView
+                        android:id="@+id/image_user_avatar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_user_avatar"
+                        android:background="@drawable/circle_background"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="用户头像" />
+
+                    <!-- 用户信息 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/text_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="用户昵称"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_color_primary"
+                            tools:text="微信用户" />
+
+                        <TextView
+                            android:id="@+id/text_user_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="用户类型"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_color_secondary"
+                            tools:text="微信用户" />
+
+                    </LinearLayout>
+
+                    <!-- 箭头图标 -->
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        android:contentDescription="查看详情"
+                        app:tint="@color/text_color_secondary" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 登录按钮区域 -->
+            <LinearLayout
+                android:id="@+id/layout_login_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- 微信登录按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_wechat_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="微信登录"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/wechat_green"
+                    app:icon="@drawable/ic_wechat"
+                    app:iconTint="@color/white"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="28dp"
+                    android:layout_marginBottom="12dp"
+                    style="@style/Widget.Material3.Button" />
+
+                <!-- 二维码登录按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_qrcode_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="扫码登录"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/primary_color"
+                    app:icon="@drawable/ic_qrcode"
+                    app:iconTint="@color/white"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="28dp"
+                    android:layout_marginBottom="12dp"
+                    style="@style/Widget.Material3.Button" />
+
+                <!-- 游客登录按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_guest_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="游客体验"
+                    android:textSize="16sp"
+                    android:textColor="@color/primary_color"
+                    android:backgroundTint="@color/white"
+                    app:strokeColor="@color/primary_color"
+                    app:strokeWidth="2dp"
+                    app:icon="@drawable/ic_guest"
+                    app:iconTint="@color/primary_color"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="28dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+
+            </LinearLayout>
+
+            <!-- 退出登录按钮 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_login"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="退出登录"
+                android:textSize="16sp"
+                android:textColor="@color/error_color"
+                android:backgroundTint="@color/white"
+                app:strokeColor="@color/error_color"
+                app:strokeWidth="1dp"
+                app:cornerRadius="24dp"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                tools:visibility="visible" />
+
+            <!-- 设置分组标题 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="应用设置"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_color_primary"
+                android:layout_marginBottom="12dp" />
+
+            <!-- 语言设置 -->
+            <LinearLayout
+                android:id="@+id/layout_language_setting"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_language"
+                    android:contentDescription="语言设置"
+                    app:tint="@color/primary_color" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="语言"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_color_primary" />
+
+                <TextView
+                    android:id="@+id/text_language_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="简体中文"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_color_secondary"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    android:contentDescription="进入设置"
+                    app:tint="@color/text_color_secondary" />
+
+            </LinearLayout>
+
+            <!-- 主题设置 -->
+            <LinearLayout
+                android:id="@+id/layout_theme_setting"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_theme"
+                    android:contentDescription="主题设置"
+                    app:tint="@color/primary_color" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="主题"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_color_primary" />
+
+                <TextView
+                    android:id="@+id/text_theme_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="跟随系统"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_color_secondary"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    android:contentDescription="进入设置"
+                    app:tint="@color/text_color_secondary" />
+
+            </LinearLayout>
+
+            <!-- 其他分组标题 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_color_primary"
+                android:layout_marginBottom="12dp" />
+
+            <!-- 关于应用 -->
+            <LinearLayout
+                android:id="@+id/layout_about"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_info"
+                    android:contentDescription="关于应用"
+                    app:tint="@color/primary_color" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="关于应用"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_color_primary" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    android:contentDescription="进入设置"
+                    app:tint="@color/text_color_secondary" />
+
+            </LinearLayout>
+
+            <!-- 帮助反馈 -->
+            <LinearLayout
+                android:id="@+id/layout_help"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_help"
+                    android:contentDescription="帮助反馈"
+                    app:tint="@color/primary_color" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:text="帮助与反馈"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_color_primary" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    android:contentDescription="进入设置"
+                    app:tint="@color/text_color_secondary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 加载进度条 -->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:indicatorColor="@color/primary_color"
+        app:trackColor="@color/primary_color_light"
+        tools:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

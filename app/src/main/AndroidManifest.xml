@@ -20,15 +20,52 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTranslator"
         tools:targetApi="31">
+        <!-- 主Activity - 恢复为启动页 -->
         <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 设置Activity -->
+        <activity
+            android:name=".presentation.ui.settings.SimpleSettingsActivity"
+            android:exported="false" />
+
+        <!-- 懒加载演示Activity -->
+        <activity
+            android:name=".presentation.ui.demo.LazyLoadingDemoActivity"
+            android:exported="false" />
+
+        <!-- 登录Activity - 从设置页调用 -->
+        <activity
+            android:name=".presentation.ui.login.LoginActivity"
+            android:exported="false" />
+
+        <!-- 其他Activity可以在这里添加 -->
+
+        <!-- 微信登录回调Activity -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 设置Activity -->
+        <activity
+            android:name=".presentation.ui.settings.SettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".presentation.ui.main.MainActivity" />
+
+        <!-- 二维码登录Activity -->
+        <activity
+            android:name=".presentation.ui.login.QRCodeLoginActivity"
+            android:exported="false"
+            android:parentActivityName=".presentation.ui.settings.SettingsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

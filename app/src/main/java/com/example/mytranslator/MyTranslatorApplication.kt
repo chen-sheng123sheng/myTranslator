@@ -3,6 +3,10 @@ package com.example.mytranslator
 import android.app.Application
 import android.util.Log
 import com.example.mytranslator.data.config.ApiConfig
+import com.example.mytranslator.data.config.WeChatConfig
+import com.example.login.api.LoginManager
+import com.example.login.api.LoginConfig
+import com.example.login.api.LogLevel
 import com.example.mytranslator.common.utils.ApiTestHelper
 import com.example.mytranslator.common.utils.DatabaseTestHelper
 import kotlinx.coroutines.CoroutineScope
@@ -73,6 +77,9 @@ class MyTranslatorApplication : Application() {
 
         // 初始化API配置
         initializeApiConfig()
+
+        // 初始化微信登录
+        initializeWeChatLogin()
 
         // 初始化其他组件
         initializeOtherComponents()
@@ -184,6 +191,43 @@ class MyTranslatorApplication : Application() {
     }
 
     /**
+     * 初始化微信登录
+     *
+     * 🎯 设计考虑：
+     * - 微信SDK的初始化
+     * - 配置验证和状态检查
+     * - 错误处理和日志记录
+     */
+    private fun initializeWeChatLogin() {
+        try {
+            Log.d(TAG, "🔐 注册登录模块（延迟初始化）")
+
+            // 获取LoginManager实例
+            val loginManager = LoginManager.getInstance()
+
+            // 创建登录配置
+            val loginConfig = LoginConfig.Builder()
+                .weChatAppId("wx1234567890abcdef")           // 替换为真实的微信AppID
+                .weChatAppSecret("your_app_secret_here")     // 替换为真实的微信AppSecret
+                .baseUrl("https://api.example.com/")         // API基础URL
+                .networkTimeout(30000)                       // 网络超时30秒
+                .retryCount(3)                              // 重试3次
+                .encryptStorage(true)                       // 加密存储用户信息
+                .enableDebugLog(BuildConfig.DEBUG)         // 根据构建类型启用调试日志
+                .logLevel(if (BuildConfig.DEBUG) LogLevel.DEBUG else LogLevel.INFO)
+                .build()
+
+            // 注册login模块（不进行实际初始化）
+            loginManager.register(this, loginConfig)
+
+            Log.i(TAG, "✅ 登录模块已注册，将在首次使用时初始化")
+
+        } catch (e: Exception) {
+            Log.e(TAG, "❌ 登录模块注册异常", e)
+        }
+    }
+
+    /**
      * 初始化其他组件
      *
      * 🎯 设计考虑：
@@ -195,10 +239,10 @@ class MyTranslatorApplication : Application() {
     private fun initializeOtherComponents() {
         // 初始化日志系统
         initializeLogging()
-        
+
         // 初始化性能监控
         initializePerformanceMonitoring()
-        
+
         // 初始化全局异常处理
         initializeGlobalExceptionHandler()
     }

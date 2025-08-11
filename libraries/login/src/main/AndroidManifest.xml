@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+    Login模块清单文件
+
+    🎯 配置目的：
+    1. 声明模块所需的权限
+    2. 注册微信回调Activity
+    3. 配置网络安全策略
+    4. 声明模块的组件和服务
+
+    🏗️ 权限说明：
+    - INTERNET：网络请求权限，用于API调用
+    - ACCESS_NETWORK_STATE：网络状态检查
+    - WRITE_EXTERNAL_STORAGE：可选，用于缓存头像等
+
+    📱 组件说明：
+    - WXEntryActivity：微信SDK要求的回调Activity
+    - 必须放在{包名}.wxapi包下
+    - 必须命名为WXEntryActivity
+    -->
+
+    <!-- 网络权限 - 用于API请求和二维码登录 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 网络状态权限 - 用于检查网络连接状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 存储权限 - 可选，用于缓存用户头像等资源 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <application>
+
+        <!--
+        微信回调Activity
+
+        🎯 重要说明：
+        1. 包名路径：必须是{主应用包名}.wxapi.WXEntryActivity
+        2. 当前路径：com.example.mytranslator.wxapi.WXEntryActivity ✅
+        3. exported="true"：允许微信客户端调起
+        4. taskAffinity：独立的任务栈，避免影响主应用
+        5. launchMode="singleTop"：避免重复创建实例
+
+        🔧 模块化配置原理：
+        - 虽然在login模块中，但使用主应用包名
+        - 通过AndroidManifest合并机制生效
+        - 微信SDK通过包名约定找到这个Activity
+        - 保持了模块化架构的完整性
+
+        ⚠️ 注意事项：
+        - 包名必须与主应用的applicationId一致
+        - 这个Activity会被合并到主应用的清单文件
+        - 不要修改类名和包名路径
+        -->
+        <activity
+            android:name="com.example.mytranslator.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+            <!-- Intent过滤器 - 允许微信客户端调起 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
+    </application>
+
+</manifest>
